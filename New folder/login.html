@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
+    <style>
+        #signout {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <img src="google-loader.gif" style="width: 10%; height: 30%;" id="google" alt="profile"><br><br>
+    <button type="button" id="signout">Sign signout</button>
+    <img src="" id="account" alt>
+</body>
+
+<script type="module">
+
+    import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signInWithPopup, signsignout, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBx3TVNIRM44-I3LdRvC4eZbA3X4K-r4HU",
+        authDomain: "auth-d8588.firebaseapp.com",
+        projectId: "auth-d8588",
+        storageBucket: "auth-d8588.appspot.com",
+        messagingSenderId: "652571894242",
+        appId: "1:652571894242:web:4a5c60b8c07edc8dbd99bb"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider(app);
+
+    google.addEventListener('click', (e) => {
+        // signInWithRedirect(auth, provider);
+
+        // getRedirectResult(auth)
+        //     .then((result) => {
+        //         // This gives you a Google accountess Token. You can use it to accountess Google APIs.
+        //         const credential = GoogleAuthProvider.credentialFromResult(result);
+        //         const token = credential.accountessToken;
+
+        //         // The signed-in user info.
+        //         const user = result.user;
+        //         alert(user.displayName);
+        //     }).catch((error) => {
+        //         // Handle Errors here.
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         // The email of the user's accountount used.
+        //         const email = error.customData.email;
+        //         // The AuthCredential type that was used.
+        //         const credential = GoogleAuthProvider.credentialFromError(error);
+        //         // ...
+        //     });
+
+        signInWithPopup(auth, provider)
+            // .then((result) => {
+            //     // This gives you a Google accountess Token. You can use it to accountess the Google API.
+            //     const credential = GoogleAuthProvider.credentialFromResult(result);
+            //     const token = credential.accountessToken;
+            //     // The signed-in user info.
+            //     const user = result.user;
+            //     const x = user.photoURL;
+            //     console.log(x)
+            //     if (user != null) {
+            //         document.getElementById('signout').style.display = "none";
+            //         document.getElementById('account').src = x
+            //         document.getElementById("google").style.display = "none";
+            //     }
+            //     // document.getElementById('account').src = "x"
+
+
+            //     // ...
+            // })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's accountount used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+                alert(errorMessage);
+            });
+
+        // signout.addEventListener('click', (e) => {
+        //     // const auth = getAuth();
+        //     signsignout(auth).then(() => {
+        //         e.preventDefault();
+        //         auth.signsignout();
+        //         console.log('User signed signout!');
+
+        //     }).catch((error) => {
+        //         // An error happened.
+        //     });
+        // })
+
+
+
+
+
+
+    })
+
+    signout.addEventListener('click', (e) => {
+        signsignout(auth).then(() => {
+            window.location.reload();
+        }).catch((error) => {
+            // An error happened.
+        });
+    })
+
+    onAuthStateChanged(auth, (user) => {
+        if(user != null) {
+            document.getElementById('account').src = user.photoURL
+            document.getElementById('signout').style.display = "block";
+            document.getElementById('google').style.display = "none";
+        } else {
+            document.getElementById('google').style.display = "block";
+        }
+    })
+    
+
+
+</script>
+
+</html>
